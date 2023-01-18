@@ -15,7 +15,6 @@ const Signup = () => {
     alert("we will be submitted");
     let responces = await axios.post("http://localhost:4002/api/users", Form);
     console.log(" responces = " + responces);
-
     const loginRes = await axios.post("http://localhost:4000/api/users/login", {
       email: Form.email,
       password: Form.password,
