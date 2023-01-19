@@ -11,6 +11,7 @@ const pool = require("../../config/database");
 //jsonwebtoken help to create a token
 const jwt = require("jsonwebtoken");
 //exporting all methods
+require("dotenv").config();
 module.exports = {
   createUser: (req, res) => {
     console.log(req.body);
@@ -97,7 +98,7 @@ module.exports = {
       return res.status(200).json({ data: results });
     });
   },
-  login:(req, res) => {
+  login: (req, res) => {
     //destructuring req.body
     const { email, password } = req.body;
     //validation
@@ -126,6 +127,7 @@ module.exports = {
         expiresIn: "1h",
       });
 
+      console.log(" Token is = " + token);
       //returning token and user-info
       return res.json({
         token,

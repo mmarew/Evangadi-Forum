@@ -8,5 +8,5 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/api/users", userRouter);
-app.use("/api/users/all", userRouter);
+// app.use("/api/users/all", userRouter);
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
