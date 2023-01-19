@@ -3,13 +3,13 @@ const {
   userById,
   getUserByEmail,
   profile,
-} = require("./user.service"); 
+} = require("./user.service");
 //Importing bcryptJs module to use password encryption
-const bcrypt = require("bcryptjs"); 
+const bcrypt = require("bcryptjs");
 //Importing database structure
-const pool = require("../../config/database"); 
+const pool = require("../../config/database");
 //jsonwebtoken help to create a token
-const jwt = require("jsonwebtoken"); 
+const jwt = require("jsonwebtoken");
 //exporting all methods
 module.exports = {
   createUser: (req, res) => {
@@ -97,16 +97,14 @@ module.exports = {
       return res.status(200).json({ data: results });
     });
   },
-  login: (req, res) => {
+  login:(req, res) => {
     //destructuring req.body
     const { email, password } = req.body;
-
     //validation
     if (!email || !password)
       return res
         .status(400)
         .json({ msg: "Not all fields have been provided!" });
-
     //sending data to check if email exist on our database
     getUserByEmail(email, (err, results) => {
       if (err) {

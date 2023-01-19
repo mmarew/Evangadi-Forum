@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const Signup = () => {
+  const navigete = useNavigate();
   const [Form, setForm] = useState({});
+  const [UserData, setUserData] = useState({});
   let handleChange = (e) => {
     // console.log(e.target.value);
     let value = e.target.value;
@@ -11,14 +13,21 @@ const Signup = () => {
     setForm({ ...Form, [inputName]: value });
   };
   let handleSubmit = async (e) => {
-    e.preventDefault();
-    alert("we will be submitted");
+    e.preventDefault(); 
     let responces = await axios.post("http://localhost:4002/api/users", Form);
-    console.log(" responces = " + responces);
-    const loginRes = await axios.post("http://localhost:4000/api/users/login", {
+    console.log(" responces = " + responces.data);
+    const loginRes = await axios.post("http://localhost:4002/api/users/login", {
       email: Form.email,
       password: Form.password,
     });
+    //
+    setUserData({
+      token: loginRes.data.token,
+      user: loginRes.data.user,
+    });
+    //set localStorage with the token
+    localStorage.setItem("auth-token", loginRes.data.token);
+    navigete("/");
   };
   return (
     <div>
@@ -34,6 +43,8 @@ const Signup = () => {
         <br />
         <br />
         userName, firstName, lastName, email, password
+        <br />
+        <br />
         <input
           required
           placeholder="Last name"
