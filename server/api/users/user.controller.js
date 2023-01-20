@@ -117,7 +117,6 @@ module.exports = {
           .status(404)
           .json({ msg: "No account with this email has been registered" });
       }
-
       //check provided password by the user with the encrypted password from database
       const isMatch = bcrypt.compareSync(password, results.user_password);
       if (!isMatch) return res.status(404).json({ msg: "Invalid Credentials" });
@@ -126,7 +125,6 @@ module.exports = {
       const token = jwt.sign({ id: results.user_id }, process.env.JWT_SECRET, {
         expiresIn: "1h",
       });
-
       console.log(" Token is = " + token);
       //returning token and user-info
       return res.json({

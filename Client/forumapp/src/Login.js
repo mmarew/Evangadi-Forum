@@ -14,11 +14,11 @@ function Login() {
         "http://localhost:4002/api/users/login",
         Form
       );
-      console.log(loginRes);
+      console.log(loginRes.data);
       setUserData({
         token: loginRes.data.token,
         user: loginRes.data.user,
-      }); 
+      });
       localStorage.setItem("auth-token", loginRes.data.token);
       //navigate user to homepage
       navigate("/");
