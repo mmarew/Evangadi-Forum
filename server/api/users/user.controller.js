@@ -12,6 +12,7 @@ const pool = require("../../config/database");
 const jwt = require("jsonwebtoken");
 //exporting all methods
 require("dotenv").config();
+ 
 module.exports = {
   createUser: (req, res) => {
     console.log(req.body);
@@ -39,11 +40,9 @@ module.exports = {
             .json({ msg: "An account with this email already exists!" });
         } else {
           //password encryption
-          const salt = bcrypt.genSaltSync();
-
+          const salt = bcrypt.genSaltSync();          
           //changing the value of password from req.body with the encrypted password
-          req.body.password = bcrypt.hashSync(password, salt);
-
+          req.body.password = bcrypt.hashSync(password, salt);           
           //sending data to register
           register(req.body, (err, results) => {
             if (err) {
@@ -61,10 +60,8 @@ module.exports = {
                     .status(err)
                     .json({ msg: "database connection err" });
                 }
-
                 //adding user_id to req.body
                 req.body.userId = results[0].user_id;
-
                 //sending data to profile with the user_id included in req.body
                 profile(req.body, (err, results) => {
                   if (err) {

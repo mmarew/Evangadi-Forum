@@ -30,28 +30,38 @@ function Login() {
     setForm({ ...Form, [e.target.name]: e.target.value });
   };
   return (
-    <>
-      <form onSubmit={submitLoginForm}>
-        <input
-          onChange={handleChange}
-          name="email"
-          placeholder="Email"
-          type="text"
-        />
-        <br />
-        <br />
-        <input
-          onChange={handleChange}
-          name="password"
-          placeholder="Password"
-          type="text"
-        />
-        <br />
-        <br />
-        <button type="submit">Submit</button>
-      </form>
-      <Link to="/signup">Sign up</Link>
-    </>
+    <div className="loginAll">
+      <div className="loginParentDiv">
+        <div className="loginDiv">
+          <form className="loginForm" onSubmit={submitLoginForm}>
+            <input
+              onChange={handleChange}
+              name="email"
+              placeholder="Email"
+              type="text"
+            />
+            <br />
+            <input
+              onChange={handleChange}
+              name="password"
+              placeholder="Password"
+              type="text"
+            />
+            <br />
+            <button type="submit">Submit</button>
+          </form>
+          <Link className="signUp" to="/signup">
+            Sign up
+          </Link>
+        </div>
+        <div className="info login">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae beatae
+          nam deserunt quos facilis fuga laborum, exercitationem impedit modi!
+          Rem pariatur nobis nam sit aut cupiditate officiis corrupti eaque
+          natus.
+        </div>
+      </div>
+    </div>
   );
 }
 export default Login;

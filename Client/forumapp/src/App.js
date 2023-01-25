@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useContext, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import "./App.css";
-import { UserContext } from "./context/UserContext";
-import Home from "./Pages/Home/Home";
-import Login from "./Pages/Login/Login";
-import SignUp from "./Pages/SignUp/SignUp";
+import { UserContext } from "./UserContext";
+import Home from "./Home";
+import Login from "./Login";
+import SignUp from "./Signup";
+import Header from "./Header";
 function App() {
   const [userData, setUserData] = useContext(UserContext);
   const checkLoggedIn = async () => {
@@ -17,8 +17,9 @@ function App() {
       token = "";
     } else {
       //if token exists in localStorage then use auth to verify token and get user info
-      const userRes = await axios.get("http://localhost:4000/api/users", {
+      const userRes = await axios.get("http://localhost:4002/api/users", {
         headers: { "x-auth-token": token },
+        Token: token,
       });
 
       //set the global state with user info
@@ -48,10 +49,42 @@ function App() {
     <Router>
       <div>
         <Routes>
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/login" element={<Login />} />
+          <Route
+            path="/signup"
+            element={
+              <>
+                <Header />
+                <SignUp />
+              </>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <>
+                <Header />
+                <Login />
+              </>
+            }
+          />
           {/* passing logout function as props to Home page */}
-          <Route path="/" element={<Home logout={logout} />} />
+          <Route
+            path="/"
+            element={
+              <>
+                <Header />
+                <Home logout={logout} />
+              </>
+            }
+          />
+          <Route
+            path="/howitwork"
+            element={
+              <>
+                <Header />
+              </>
+            }
+          />
         </Routes>
       </div>
     </Router>
